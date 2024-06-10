@@ -2,39 +2,38 @@ package com.project.petProject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.http.auth.AuthOption;
 import org.apache.http.client.fluent.Content;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.io.IOException;
 import java.util.Base64;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         String path = "src/main/resources/test.yaml";
-        parseObjToJson(parseYamlToObject(path));
-
         URL endPoint = new URL("https://tanyushkadurneva15.atlassian.net/rest/api/3/issue");
-        String json = "{\n" +
-                "  \"fields\": {\n" +
-                "    \"project\":\n" +
-                "    {\n" +
-                "        \"key\": \"PR\"\n" +
-                "    },\n" +
-                "    \"summary\": \"Java make this task\",\n" +
-                "    \"issuetype\": {\n" +
-                "        \"name\": \"Task\"\n" +
-                "}\n" +
-                "  }\n" +
-                "}";
-        sendJsonToEndPoint(json, endPoint);
+        Epic epic = parseYamlToObject(path);
+
+        for (Task task : epic.getTaskList()) {
+            JsonFormatter jsonFormatter = new JsonFormatter();
+            Fields fields = new Fields();
+            fields.setSummary(task.getNameTask());
+            Project project = new Project();
+            project.setKey(epic.getTitle());
+            Issuetype issuetype = new Issuetype();
+            issuetype.setName("Task");
+            fields.setProject(project);
+            fields.setIssuetype(issuetype);
+            jsonFormatter.setFields(fields);
+
+            parseObjToJson(jsonFormatter);
+            sendJsonToEndPoint(parseObjToJson(jsonFormatter), endPoint);
+        }
     }
 
 
@@ -45,9 +44,10 @@ public class Main {
         return test;
     }
 
-    public static void parseObjToJson(Epic test) throws IOException {
+    public static String parseObjToJson(JsonFormatter test) throws IOException {
         String serialized = new ObjectMapper().writeValueAsString(test);
         System.out.println(serialized);
+        return serialized;
     }
 
     public static void sendJsonToEndPoint(String json, URL endPoint) throws IOException, URISyntaxException {
@@ -64,5 +64,6 @@ public class Main {
         String valueToEncode = username + ":" + password;
         return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
     }
+
 
 }
