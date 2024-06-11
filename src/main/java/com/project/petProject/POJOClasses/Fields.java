@@ -1,12 +1,9 @@
-package com.project.petProject;
+package com.project.petProject.POJOClasses;
 
 public class Fields {
     Project ProjectObject;
     private String summary;
     Issuetype IssuetypeObject;
-
-
-    // Getter Methods
 
     public Project getProject() {
         return ProjectObject;
@@ -19,8 +16,6 @@ public class Fields {
     public Issuetype getIssuetype() {
         return IssuetypeObject;
     }
-
-    // Setter Methods
 
     public void setProject(Project projectObject) {
         this.ProjectObject = projectObject;

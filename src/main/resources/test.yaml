@@ -1,8 +1,8 @@
   title: PR
   taskList:
-    - nameTask: Создать json для создание задачи в jira
+    - nameTask: Создать задачи в jira
       description: Берем отсюда параметры и вставляем в json
       label: jira, json, api, любовь
-    - nameTask: Почесать жопу
+    - nameTask: Взять и сделать
       description: взять расчестку и почесать жопу
  

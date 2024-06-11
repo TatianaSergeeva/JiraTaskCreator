@@ -1,16 +1,11 @@
-package com.project.petProject;
+package com.project.petProject.POJOClasses;
 
 public class Issuetype {
     private String name;
 
-
-    // Getter Methods
-
     public String getName() {
         return name;
     }
-
-    // Setter Methods
 
     public void setName(String name) {
         this.name = name;

@@ -1,4 +1,4 @@
-package com.project.petProject;
+package com.project.petProject.SerializeClasses;
 
 import java.util.List;
 
