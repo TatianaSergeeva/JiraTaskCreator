@@ -4,25 +4,68 @@ import org.apache.http.client.fluent.Content;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Properties;
 
 public class APIClient {
-    public static void sendJsonToEndPoint(String json, URL endPoint) throws IOException, URISyntaxException {
+
+   static final String pathProperty = "src/main/resources/config.properties";
+
+    public static Content sendPostRequest(String json, URL endPoint) throws IOException, URISyntaxException {
 
         final Content postResult = Request.Post(endPoint.toURI())
                 .bodyString(json, ContentType.APPLICATION_JSON)
-                .setHeader("Authorization", getBasicAuthenticationHeader("tanyushkadurneva15@gmail.com",
-                        "ATATT3xFfGF09zQGLENJXmxxjg7Qmu8WjLiyJXC2L6jpelnYjUIkhicUGyeXA4QNy81HbiWTt_8tx_gSEzPlnzulev7JszRH-7BhVI7XZFGZVqkvJp4Q2fIwCmBffTJnH-nBObx-nxit5Ghd_bCmTg5JB1XmvNAALcRqkiGKf6I_HTJPSkBprQQ=D4C74F29"))
+                .setHeader("Authorization", getBasicAuthenticationHeader(readLoginProperties(pathProperty),
+                        readPasswordProperties(pathProperty)))
                 .execute().returnContent();
-        System.out.println(postResult.asString());
+        return postResult;
     }
 
     private static final String getBasicAuthenticationHeader(String username, String password) {
         String valueToEncode = username + ":" + password;
         return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
+    }
+
+    private static String readLoginProperties(String pathProperty) {
+
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        String login = null;
+        try {
+            fis = new FileInputStream(pathProperty);
+            property.load(fis);
+
+            login = property.getProperty("jira.login");
+
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
+
+        return login;
+    }
+
+    private static String readPasswordProperties(String pathProperty) {
+
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        String password = null;
+        try {
+            fis = new FileInputStream(pathProperty);
+            property.load(fis);
+
+            password = property.getProperty("jira.password");
+
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
+
+        return password;
     }
 
 }

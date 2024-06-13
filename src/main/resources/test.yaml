@@ -1,8 +1,8 @@
   title: PR
   taskList:
-    - nameTask: Создать задачи в jira
+    - nameTask: Внести правки в проект
       description: Берем отсюда параметры и вставляем в json
-      label: jira, json, api, любовь
-    - nameTask: Взять и сделать
-      description: взять расчестку и почесать жопу
+      label: jira, json, api
+    - nameTask: Захватить мир
+      description: определить кто ты - Пинки или Брейн
  
