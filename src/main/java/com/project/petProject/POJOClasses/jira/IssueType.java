@@ -1,6 +1,7 @@
-package com.project.petProject.POJOClasses;
+package com.project.petProject.POJOClasses.jira;
 
-public class Issuetype {
+public class IssueType {
+
     private String name;
 
     public String getName() {

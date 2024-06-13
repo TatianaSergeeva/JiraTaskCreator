@@ -1,6 +1,7 @@
-package com.project.petProject.POJOClasses;
+package com.project.petProject.POJOClasses.jira;
 
 public class Project {
+
     private String key;
 
     public String getKey() {

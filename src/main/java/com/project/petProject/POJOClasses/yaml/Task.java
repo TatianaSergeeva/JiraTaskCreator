@@ -1,26 +1,26 @@
-package com.project.petProject.SerializeClasses;
+package com.project.petProject.POJOClasses.yaml;
 
 public class Task {
+
     private String nameTask;
     private String description;
     private String label;
 
-    public Task(String nameTask, String description, String label) {
-        this.nameTask = nameTask;
-        this.description = description;
-        this.label = label;
+    public Task() {
     }
 
     public Task(String nameTask) {
         this.nameTask = nameTask;
     }
 
-    public Task(String description, String nameTask) {
+    public Task(String nameTask, String description) {
+        this(nameTask);
         this.description = description;
-        this.nameTask = nameTask;
     }
 
-    public Task() {
+    public Task(String nameTask, String description, String label) {
+        this(nameTask, description);
+        this.label = label;
     }
 
     public String getNameTask() {

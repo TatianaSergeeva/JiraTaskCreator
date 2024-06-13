@@ -1,7 +1,7 @@
-package com.project.petProject;
+package com.project.petProject.utills;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.petProject.POJOClasses.JsonFormatter;
+import com.project.petProject.POJOClasses.jira.JsonFormatter;
 
 import java.io.IOException;
 
