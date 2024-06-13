@@ -15,9 +15,9 @@ public class APIClient {
 
    static final String pathProperty = "src/main/resources/config.properties";
 
-    public static Content sendPostRequest(String json, URL endPoint) throws IOException, URISyntaxException {
+    public static Content sendPostRequest(String json, String endPoint) throws IOException, URISyntaxException {
 
-        final Content postResult = Request.Post(endPoint.toURI())
+        final Content postResult = Request.Post(endPoint.toString())
                 .bodyString(json, ContentType.APPLICATION_JSON)
                 .setHeader("Authorization", getBasicAuthenticationHeader(readLoginProperties(pathProperty),
                         readPasswordProperties(pathProperty)))
@@ -66,6 +66,25 @@ public class APIClient {
         }
 
         return password;
+    }
+
+    public static String readURLProperties(String pathProperty) {
+
+        FileInputStream fis;
+        Properties property = new Properties();
+
+        String url = null;
+        try {
+            fis = new FileInputStream(pathProperty);
+            property.load(fis);
+
+            url = property.getProperty("jira.url");
+
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
+
+        return url;
     }
 
 }

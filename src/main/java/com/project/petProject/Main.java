@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import static com.project.petProject.APIClient.sendPostRequest;
+import static com.project.petProject.APIClient.*;
 import static com.project.petProject.JsonSerialize.parseObjToJson;
 import static com.project.petProject.YamlParse.parseYamlToObject;
 
@@ -19,7 +19,7 @@ import static com.project.petProject.YamlParse.parseYamlToObject;
 public class Main {
     public static void main(String[] args) throws IOException, URISyntaxException {
         String path = "src/main/resources/test.yaml";
-        URL endPoint = new URL("https://tanyushkadurneva15.atlassian.net/rest/api/3/issue");
+        String endPoint = readURLProperties(pathProperty);
         Epic epic = parseYamlToObject(path);
 
 
