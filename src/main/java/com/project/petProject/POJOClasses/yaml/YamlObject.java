@@ -1,21 +1,22 @@
-package com.project.petProject;
+package com.project.petProject.POJOClasses.yaml;
 
 import java.util.List;
 
-public class Epic {
+public class YamlObject {
+
     private String title;
     private List<Task> taskList;
 
-    public Epic(String title, List<Task> taskList) {
+    public YamlObject() {
+    }
+
+    public YamlObject(String title) {
         this.title = title;
+    }
+
+    public YamlObject(String title, List<Task> taskList) {
+        this(title);
         this.taskList = taskList;
-    }
-
-    public Epic(String title) {
-        this.title = title;
-    }
-
-    public Epic() {
     }
 
     public String getTitle() {

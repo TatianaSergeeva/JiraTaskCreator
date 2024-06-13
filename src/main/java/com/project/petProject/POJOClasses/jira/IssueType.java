@@ -1,16 +1,12 @@
-package com.project.petProject;
+package com.project.petProject.POJOClasses.jira;
 
-public class Issuetype {
+public class IssueType {
+
     private String name;
-
-
-    // Getter Methods
 
     public String getName() {
         return name;
     }
-
-    // Setter Methods
 
     public void setName(String name) {
         this.name = name;
