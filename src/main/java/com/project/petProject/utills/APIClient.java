@@ -21,7 +21,7 @@ public class APIClient {
                     .setHeader("Authorization",
                             getBasicAuthenticationHeader
                                     (getParamFromProperties(PATH_PROPERTY.getPath(), "jira.login"),
-                                            getParamFromProperties(PATH_PROPERTY.getPath(), "jira.password"))
+                                            getParamFromProperties(PATH_PROPERTY.getPath(), "jira.token"))
                     )
                     .execute().returnContent();
         } catch (IOException e) {
